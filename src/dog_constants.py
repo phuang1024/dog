@@ -17,37 +17,15 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-import sys
-import os
 import string
-from dog_python import parse_python
 
-VERSION = "0.0.1"
+BLACK =   "\x1B[0;30m"
+GRAY =    "\x1B[1;30m"
+WHITE =   "\x1B[0;37m"
+RED =     "\x1B[0;31m"
+YELLOW =  "\x1B[0;33m"
+GREEN =   "\x1B[0;32m"
+CYAN =    "\x1B[0;34m"
+MAGENTA = "\x1B[0;35m"
 
-
-def main():
-    if len(sys.argv) == 1:
-        print("Dog, a file printer with syntax highlighting.")
-        print("Type \"dog --help\" for more info.")
-        return
-    elif sys.argv[1] == "--help":
-        print("Usage:")
-        print("    dog file.py")
-    elif sys.argv[1] == "--version":
-        print(VERSION)
-
-    path = os.path.expanduser(os.path.abspath(sys.argv[1]))
-    if os.path.isfile(path):
-        with open(path, "r") as file:
-            data = file.read()
-            if not data.endswith("\n"):
-                data += "\n"
-    else:
-        print(f"No file: {path}")
-        return
-
-    if path.endswith(".py"):
-        parse_python(data)
-
-
-main()
+VAR_CHARS = string.ascii_letters + "_"
