@@ -22,6 +22,7 @@ import os
 from dog_constants import *
 from dog_python import parse_python
 from dog_c import parse_c
+import time
 
 VERSION = "0.0.1"
 
@@ -45,35 +46,36 @@ def main():
             data = file.read()
             if not data.endswith("\n"):
                 data += "\n"
-    elif path == "bark":
+    elif path[(len(path)-4):] == "bark":
         pass
     else:
         print(f"No file: {path}")
+        print(path[(len(path)-4):])
         return
 
     if path.endswith(".py"):
         parse_python(data)
     elif path.endswith(".c"):
         parse_c(data)
-    elif path == "bark":
+    elif path[(len(path)-4):] == "bark":
         while 1:
             os.system("clear")
-            print('''            /-|/-|
+            print('''                               /-|/-|
                         ______/__/  |
                        / O         /
                      _/          /
                    0|_____     /
                         |_____| ''')
-            sleep(1)
+            time.sleep(1)
             os.system("clear")
-            print('''            /-|/-|
+            print('''                               /-|/-|
                         ______/__/  |
                        / O         /
                      _/          /
                    0|_____--   /
                Woof! _____/  
                         |_____| ''')
-            sleep(1)
+            time.sleep(1)
             
     else:
         print(data)
