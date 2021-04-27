@@ -100,10 +100,15 @@ def main():
     elif sys.argv[1] == "--version":
         print(VERSION)
 
-    with open(os.path.expanduser(os.path.abspath(sys.argv[1])), "r") as file:
-        data = file.read()
-        if not data.endswith("\n"):
-            data += "\n"
+    path = os.path.expanduser(os.path.abspath(sys.argv[1]))
+    if os.path.isfile(path):
+        with open(path, "r") as file:
+            data = file.read()
+            if not data.endswith("\n"):
+                data += "\n"
+    else:
+        print(f"No file: {path}")
+        return
 
     prev = " "
     in_string = False
