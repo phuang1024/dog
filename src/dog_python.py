@@ -75,6 +75,8 @@ def parse_python(data):
     string_char = ""
 
     while len(data) > 0:
+        sys.stdout.write(WHITE)
+
         # Comment
         if data.startswith("#") and not in_string:
             while data[0] != "\n":
@@ -105,6 +107,14 @@ def parse_python(data):
         # Write string color
         if in_string:
             sys.stdout.write(YELLOW)
+            sys.stdout.write(data[0])
+            prev = data[0]
+            data = data[1:]
+            continue
+
+        # Number literals
+        if (prev not in VAR_CHARS) and (data[0] in string.digits):
+            sys.stdout.write(GREEN)
             sys.stdout.write(data[0])
             prev = data[0]
             data = data[1:]
@@ -141,4 +151,3 @@ def parse_python(data):
             sys.stdout.write(data[:1])
             prev = data[0]
             data = data[1:]
-        sys.stdout.write(WHITE)
