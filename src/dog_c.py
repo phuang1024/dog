@@ -54,10 +54,15 @@ def parse_c(data):
     prev = " "
     in_string = False
     string_char = ""
+    comment = False
 
     while len(data) > 0:
         # Comment
-        if (data.startswith("//") or data.startswith("/*")) and not in_string:
+        if (data.startswith("//") or data.startswith("/*") or comment) and not in_string:
+            if data.startswith("/*"):
+                comment = True
+            if data.startswith("*/"):
+                comment = False
             while data[0] != "\n":
                 sys.stdout.write(GRAY)
                 sys.stdout.write(data[0])
