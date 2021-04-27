@@ -21,6 +21,8 @@ import sys
 import os
 import string
 
+VERSION = "0.0.1"
+
 KWDS_RED = [
     "as",     "assert",    "async",    "await",
     "break",  "continue",  "del",      "elif",
@@ -89,10 +91,19 @@ def is_kwd(text, kwds):
 
 def main():
     if len(sys.argv) == 1:
+        print("Dog, a file printer with syntax highlighting.")
+        print("Type \"dog --help\" for more info.")
         return
+    elif sys.argv[1] == "--help":
+        print("Usage:")
+        print("    dog file.py")
+    elif sys.argv[1] == "--version":
+        print(VERSION)
 
     with open(os.path.expanduser(os.path.abspath(sys.argv[1])), "r") as file:
         data = file.read()
+        if not data.endswith("\n"):
+            data += "\n"
 
     prev = " "
     in_string = False
