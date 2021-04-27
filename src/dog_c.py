@@ -27,7 +27,7 @@ KWDS_RED = [
     "break",  "switch", "continue"
     "else",  "for",
     "if",        "#include",
-    "return",  "while", "#define"]
+    "return",  "while", "#define"
 ]
 
 KWDS_BLUE = [
