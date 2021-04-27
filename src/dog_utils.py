@@ -23,5 +23,4 @@ def is_kwd(text, kwds):
     for k in kwds:
         if text.startswith(k) and text[len(k)] not in VAR_CHARS:
             return (True, len(k))
-    else:
-        return (False, 0)
+    return (False, 0)
