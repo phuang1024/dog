@@ -20,9 +20,6 @@
 import sys
 import os
 import string
-import colorama
-from colorama import Fore
-colorama.init()
 
 KWDS_RED = [
     "as",     "assert",    "async",    "await",
@@ -40,6 +37,10 @@ KWDS_BLUE = [
     "None",
 ]
 
+KWDS_YELLOW = [
+    ""
+]
+
 VAR_CHARS = string.ascii_letters + "_"
 STRING_START = sorted([
     "\"",
@@ -47,6 +48,15 @@ STRING_START = sorted([
     "\"\"\"",
     "'''",
 ], key=len, reverse=True)
+
+BLACK =   "\x1B[0;30m"
+GRAY =    "\x1B[1;30m"
+WHITE =   "\x1B[0;37m"
+RED =     "\x1B[0;31m"
+YELLOW =  "\x1B[0;33m"
+GREEN =   "\x1B[0;32m"
+CYAN =    "\x1B[0;34m"
+MAGENTA = "\x1B[0;35m"
 
 
 def is_kwd(text, kwds):
@@ -71,7 +81,7 @@ def main():
         # Comment
         if data.startswith("#") and not in_string:
             while data[0] != "\n":
-                sys.stdout.write(Fore.GREEN)
+                sys.stdout.write(GREEN)
                 sys.stdout.write(data[0])
                 data = data[1:]
             continue
@@ -89,7 +99,7 @@ def main():
 
         # String escape character
         if in_string and data.startswith("\\"):
-            sys.stdout.write(Fore.YELLOW)   # TODO bug here
+            sys.stdout.write(GRAY)    # TODO bug here
             sys.stdout.write(data[:2])
             prev = data[1]
             data = data[2:]
@@ -97,7 +107,7 @@ def main():
 
         # Write string color
         if in_string:
-            sys.stdout.write(Fore.YELLOW)
+            sys.stdout.write(GRAY)
             sys.stdout.write(data[0])
             prev = data[0]
             data = data[1:]
@@ -107,12 +117,12 @@ def main():
         red = is_kwd(data, KWDS_RED)
         blue = is_kwd(data, KWDS_BLUE)
         if red[0] and prev not in VAR_CHARS:
-            sys.stdout.write(Fore.MAGENTA)
+            sys.stdout.write(MAGENTA)
             sys.stdout.write(data[:red[1]])
             prev = data[red[1]-1]
             data = data[red[1]:]
         elif blue[0] and prev not in VAR_CHARS:
-            sys.stdout.write(Fore.CYAN)
+            sys.stdout.write(CYAN)
             sys.stdout.write(data[:blue[1]])
             prev = data[blue[1]-1]
             data = data[blue[1]:]
@@ -122,7 +132,7 @@ def main():
             sys.stdout.write(data[:1])
             prev = data[0]
             data = data[1:]
-        sys.stdout.write(Fore.WHITE)
+        sys.stdout.write(WHITE)
 
     sys.stdout.flush()
 
