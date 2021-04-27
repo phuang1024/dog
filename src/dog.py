@@ -53,7 +53,7 @@ def main():
         print()
         print("WARNING: File type not recognized.")
 
-    print(RESET)
+    sys.stdout.write(RESET)
     sys.stdout.flush()
 
 
