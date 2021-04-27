@@ -23,15 +23,15 @@ import sys
 from dog_constants import *
 from dog_utils import is_kwd
 
-KWDS_RED = ["async",
-    "break",  "switch",  "elif",
+KWDS_RED = [
+    "break",  "switch", "continue"
     "else",  "for",
     "if",        "#include",
-    "return",    "try",  "while", "#define"]
+    "return",  "while", "#define"]
 ]
 
 KWDS_BLUE = [
-    "&&",  "struct",  "void",     "global",  "||",     "true", "false"
+    "&&",  "struct", "enum",  "void",     "global",  "||",     "true", "false"
 ]
 
 KWDS_YELLOW = [
@@ -39,7 +39,7 @@ KWDS_YELLOW = [
 ]
 
 KWDS_GREEN = [
-    "char", "int", "String[]", "float", "double"
+    "char", "int", "String[]", "float", "double", "long", "const", "unsigned", "signed", 
 ]
 
 STRING_START = sorted([
