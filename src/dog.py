@@ -53,6 +53,26 @@ def main():
         parse_python(data)
     elif path.endswith(".c"):
         parse_c(data)
+    elif path == "bark":
+        while 1:
+            os.system("clear")
+            print('''            /-|/-|
+                        ______/__/  |
+                       / O         /
+                     _/          /
+                   0|_____     /
+                        |_____| ''')
+            sleep(1)
+            os.system("clear")
+            print('''            /-|/-|
+                        ______/__/  |
+                       / O         /
+                     _/          /
+                   0|_____--   /
+               Woof! _____/  
+                        |_____| ''')
+            sleep(1)
+            
     else:
         print(data)
         print()
