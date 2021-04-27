@@ -21,6 +21,7 @@ import sys
 import os
 from dog_constants import *
 from dog_python import parse_python
+from dog_c import parse_c
 
 VERSION = "0.0.1"
 
@@ -33,6 +34,8 @@ def main():
     elif sys.argv[1] == "--help":
         print("Usage:")
         print("    dog file.py")
+        print("OR")
+        print("    dog file.c")
     elif sys.argv[1] == "--version":
         print(VERSION)
 
@@ -48,6 +51,8 @@ def main():
 
     if path.endswith(".py"):
         parse_python(data)
+    elif path.endswith(".c"):
+        parse_c(data)
     else:
         print(data)
         print()
