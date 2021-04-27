@@ -27,5 +27,6 @@ YELLOW =  "\x1B[0;33m"
 GREEN =   "\x1B[0;32m"
 CYAN =    "\x1B[0;34m"
 MAGENTA = "\x1B[0;35m"
+RESET =   "\u001b[0m"
 
 VAR_CHARS = string.ascii_letters + "_"

@@ -142,5 +142,3 @@ def parse_python(data):
             prev = data[0]
             data = data[1:]
         sys.stdout.write(WHITE)
-
-    sys.stdout.flush()

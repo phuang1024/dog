@@ -19,7 +19,7 @@
 
 import sys
 import os
-import string
+from dog_constants import *
 from dog_python import parse_python
 
 VERSION = "0.0.1"
@@ -48,6 +48,13 @@ def main():
 
     if path.endswith(".py"):
         parse_python(data)
+    else:
+        print(data)
+        print()
+        print("WARNING: File type not recognized.")
+
+    print(RESET)
+    sys.stdout.flush()
 
 
 main()
