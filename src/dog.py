@@ -45,6 +45,8 @@ def main():
             data = file.read()
             if not data.endswith("\n"):
                 data += "\n"
+    elif path == "bark":
+        pass
     else:
         print(f"No file: {path}")
         return
