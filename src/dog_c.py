@@ -35,7 +35,7 @@ KWDS_BLUE = [
 ]
 
 KWDS_YELLOW = [
-    "printf", "scanf", "fprintf", "fscanf", "qsort"
+    "printf", "scanf", "fprintf", "fscanf", "qsort", "stdio.h", "stdin.h", "string.h"
 ]
 
 KWDS_GREEN = [
