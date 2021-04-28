@@ -21,6 +21,8 @@ import sys
 import os
 from dog_constants import *
 from dog_python import parse_python
+from dog_c import parse_c
+import time
 
 VERSION = "0.0.1"
 
@@ -33,6 +35,8 @@ def main():
     elif sys.argv[1] == "--help":
         print("Usage:")
         print("    dog file.py")
+        print("OR")
+        print("    dog file.c")
     elif sys.argv[1] == "--version":
         print(VERSION)
 
@@ -42,12 +46,36 @@ def main():
             data = file.read()
             if not data.endswith("\n"):
                 data += "\n"
+    elif path[(len(path)-4):] == "bark":
+        pass
     else:
         print(f"No file: {path}")
         return
 
     if path.endswith(".py"):
         parse_python(data)
+    elif path.endswith(".c"):
+        parse_c(data)
+    elif path[(len(path)-4):] == "bark":
+        while 1:
+            os.system("clear")
+            print('''                               /-|/-|
+                        ______/__/  |
+                       / O         /
+                     _/          /
+                   0|_____     /
+                        |_____| ''')
+            time.sleep(1)
+            os.system("clear")
+            print('''                               /-|/-|
+                        ______/__/  |
+                       / O         /
+                     _/          /
+                   0|_____--   /
+               Woof! _____/  
+                        |_____| ''')
+            time.sleep(1)
+            
     else:
         print(data)
         print()
