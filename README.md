@@ -4,4 +4,8 @@ Writes file data to stdout with syntax highlighting.
 
 `dog program.py`
 
+## Contributors
+
+* Thanks to [@apawate](https://github.com/apawate) for adding C syntax highlighting.
+
 ![example](https://raw.githubusercontent.com/HuangPatrick16777216/dog/main/images/example.png)
