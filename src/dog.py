@@ -24,7 +24,7 @@ from dog_bark import bark
 from dog_python import parse_python
 from dog_c import parse_c
 
-VERSION = "0.0.1"
+VERSION = "0.0.3"
 FILE_TYPES = (
     ((".py", ".pyw"), parse_python),
     ((".c", ".h", ".i"), parse_c),
@@ -33,7 +33,7 @@ FILE_TYPES = (
 
 def main():
     if len(sys.argv) == 1:
-        print("Dog, a file printer with syntax highlighting.")
+        print(f"Dog {VERSION}, a file printer with syntax highlighting.")
         print("Type \"dog --help\" for more info.")
         return
     elif sys.argv[1] == "--help":
