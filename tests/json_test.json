@@ -1,0 +1,15 @@
+{
+    "asdf": "bsdf",
+    "csdf": [
+        "hello",
+        true,
+        null
+    ],
+    "dsdf": {
+        "esdf": {
+            "fsdf": true,
+            "gsdf": "gsdf"
+        },
+        "asdf": "a"
+    }
+}

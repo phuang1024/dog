@@ -21,6 +21,7 @@ import sys
 import os
 from dog_constants import *
 from dog_bark import bark
+from dog_json import parse_json
 from dog_python import parse_python
 from dog_c import parse_c
 from dog_xml import parse_xml
@@ -29,7 +30,8 @@ VERSION = "0.0.3"
 FILE_TYPES = (
     ((".py", ".pyw"), parse_python),
     ((".c", ".h", ".i"), parse_c),
-    ((".xml", ".html"), parse_xml)
+    ((".xml", ".html"), parse_xml),
+    ((".json",), parse_json)
 )
 
 
