@@ -50,7 +50,6 @@ def main():
         pass
     else:
         print(f"No file: {path}")
-        print(path[(len(path)-4):])
         return
 
     if path.endswith(".py"):
