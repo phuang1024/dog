@@ -24,7 +24,7 @@ import time
 def bark():
     while 1:
         os.system("clear")
-        print('''                               /-|/-|
+        print('''                           /-|/-|
                     ______/__/  |
                    / O         /
                  _/          /
@@ -32,7 +32,7 @@ def bark():
                     |_____| ''')
         time.sleep(1)
         os.system("clear")
-        print('''                               /-|/-|
+        print('''                           /-|/-|
                     ______/__/  |
                    / O         /
                  _/          /
