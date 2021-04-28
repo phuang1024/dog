@@ -58,7 +58,8 @@ def parse_c(data):
 
     while len(data) > 0:
         # Comment
-        if (data.startswith("//") or data.startswith("/*") or comment) and not in_string:
+        # TODO: Multiline comment support
+        if (data.startswith("//") or data.startswith("/*") or data.startswith("*")) and not in_string:
             if data.startswith("/*"):
                 comment = True
             if data.startswith("*/"):
