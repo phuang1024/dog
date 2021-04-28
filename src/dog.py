@@ -20,11 +20,15 @@
 import sys
 import os
 from dog_constants import *
+from dog_bark import bark
 from dog_python import parse_python
 from dog_c import parse_c
-import time
 
 VERSION = "0.0.1"
+FILE_TYPES = (
+    ((".py", ".pyw"), parse_python),
+    ((".c", ".h", ".i"), parse_c),
+)
 
 
 def main():
@@ -39,47 +43,30 @@ def main():
         print("    dog file.c")
     elif sys.argv[1] == "--version":
         print(VERSION)
+    elif sys.argv[1] == "bark":
+        bark()
 
     path = os.path.expanduser(os.path.abspath(sys.argv[1]))
+    ext = os.path.splitext(path)[-1]
     if os.path.isfile(path):
         with open(path, "r") as file:
             data = file.read()
             if not data.endswith("\n"):
                 data += "\n"
-    elif path[(len(path)-4):] == "bark":
-        pass
     else:
         print(f"No file: {path}")
         return
 
-    if path.endswith(".py"):
-        parse_python(data)
-    elif path.endswith(".c"):
-        parse_c(data)
-    elif path[(len(path)-4):] == "bark":
-        while 1:
-            os.system("clear")
-            print('''                               /-|/-|
-                        ______/__/  |
-                       / O         /
-                     _/          /
-                   0|_____     /
-                        |_____| ''')
-            time.sleep(1)
-            os.system("clear")
-            print('''                               /-|/-|
-                        ______/__/  |
-                       / O         /
-                     _/          /
-                   0|_____--   /
-               Woof! _____/  
-                        |_____| ''')
-            time.sleep(1)
-            
+    func = None
+    for exts, f in FILE_TYPES:
+        if ext in exts:
+            func = f
+            break
+    if func is not None:
+        func(data)
     else:
         print(data)
-        print()
-        print("WARNING: File type not recognized.")
+        print("\nWARNING: File type not recognized")
 
     sys.stdout.write(RESET)
     sys.stdout.flush()
