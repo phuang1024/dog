@@ -33,7 +33,7 @@ FILE_TYPES = (
     ((".c", ".h", ".i"), parse_c),
     ((".xml", ".html"), parse_xml),
     ((".json",), parse_json),
-    ((".java",), parse_java)
+    ((".java",), parse_java),
 )
 
 
@@ -45,10 +45,13 @@ def main():
     elif sys.argv[1] == "--help":
         print("Usage:")
         print("    dog file.[extension]")
+        return
     elif sys.argv[1] == "--version":
         print(VERSION)
+        return
     elif sys.argv[1] == "bark":
         bark()
+        return
 
     path = os.path.expanduser(os.path.abspath(sys.argv[1]))
     ext = os.path.splitext(path)[-1]
@@ -57,8 +60,6 @@ def main():
             data = file.read()
             if not data.endswith("\n"):
                 data += "\n"
-    elif sys.argv[1] == "--version" or sys.argv[1] == "--help":
-        data = "\n"
     else:
         print(f"No file: {path}")
         return
