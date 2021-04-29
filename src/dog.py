@@ -57,6 +57,8 @@ def main():
             data = file.read()
             if not data.endswith("\n"):
                 data += "\n"
+    elif sys.argv[1] == "--version" or sys.argv[1] == "--help":
+        data = "\n"
     else:
         print(f"No file: {path}")
         return
@@ -68,6 +70,8 @@ def main():
             break
     if func is not None:
         func(data)
+    elif data == "\n":
+        pass
     else:
         print(data)
         print("\nWARNING: File type not recognized")
