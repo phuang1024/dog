@@ -25,13 +25,15 @@ from dog_json import parse_json
 from dog_python import parse_python
 from dog_c import parse_c
 from dog_xml import parse_xml
+from dog_java import parse_java
 
 VERSION = "0.0.3"
 FILE_TYPES = (
     ((".py", ".pyw"), parse_python),
     ((".c", ".h", ".i"), parse_c),
     ((".xml", ".html"), parse_xml),
-    ((".json",), parse_json)
+    ((".json",), parse_json),
+    ((".java",), parse_java),
 )
 
 
@@ -42,13 +44,14 @@ def main():
         return
     elif sys.argv[1] == "--help":
         print("Usage:")
-        print("    dog file.py")
-        print("OR")
-        print("    dog file.c")
+        print("    dog file.[extension]")
+        return
     elif sys.argv[1] == "--version":
         print(VERSION)
+        return
     elif sys.argv[1] == "bark":
         bark()
+        return
 
     path = os.path.expanduser(os.path.abspath(sys.argv[1]))
     ext = os.path.splitext(path)[-1]
@@ -68,6 +71,8 @@ def main():
             break
     if func is not None:
         func(data)
+    elif data == "\n":
+        pass
     else:
         print(data)
         print("\nWARNING: File type not recognized")
