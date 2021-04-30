@@ -4,7 +4,7 @@
  * 
  * @author Agastya Pawate
  * @version long long ago
- * @author Period 5 Intro to CS
+ * @author Period 4 Intro to CS
  * 
  * @author Assignment:  ASCIIArt
  * 
