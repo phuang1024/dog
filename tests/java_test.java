@@ -1,14 +1,14 @@
 /**
- * The ASCIIArt program prints the name "George", the initials GKP and a some
+ * The ASCIIArt program prints the name "Agastya", the initials AP and a some
  * fish to standard output using ascii characters to make a picture.
  * 
- * @author TODO enter your name
- * @version TODO enter the date Period:
- * @author TODO enter your period
+ * @author Agastya Pawate
+ * @version long long ago
+ * @author Period 5 Intro to CS
  * 
  * @author Assignment:  ASCIIArt
  * 
- * @author Sources: TODO: list collaborators
+ * @author Sources: Agastya Pawate
  */
 public class ASCIIArt
 {
@@ -47,7 +47,7 @@ public class ASCIIArt
         System.out.println( "_/         _/    _/        " );
 
         System.out.print( "\n\t\tor...\n" );
-        // print out GKP using brackets
+        // print out AP using brackets
         System.out.println( "  _______________________" );
         // Java uses a double back slash (\\) to denote an actual backslash
         // character. The reason for this is because \ is an escape sequence for
