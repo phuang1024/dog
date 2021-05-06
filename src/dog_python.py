@@ -151,3 +151,6 @@ def parse_python(data):
             sys.stdout.write(data[:1])
             prev = data[0]
             data = data[1:]
+
+def parse_normal(data):
+    print(data)

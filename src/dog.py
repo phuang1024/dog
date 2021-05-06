@@ -22,7 +22,7 @@ import os
 from dog_constants import *
 from dog_bark import bark
 from dog_json import parse_json
-from dog_python import parse_python
+from dog_python import parse_python, parse_normal
 from dog_c import parse_c
 from dog_xml import parse_xml
 from dog_java import parse_java
@@ -34,10 +34,12 @@ FILE_TYPES = (
     ((".xml", ".html"), parse_xml),
     ((".json",), parse_json),
     ((".java",), parse_java),
+    (("no_hl",), parse_normal),
 )
-
+HIGHLIGHT = True
 
 def main():
+    HIGHLIGHT = True
     if len(sys.argv) == 1:
         print(f"Dog {VERSION}, a file printer with syntax highlighting.")
         print("Type \"dog --help\" for more info.")
@@ -52,6 +54,8 @@ def main():
     elif sys.argv[1] == "bark":
         bark()
         return
+    elif sys.argv[2] == "--no_highlight":
+        HIGHLIGHT = False
 
     path = os.path.expanduser(os.path.abspath(sys.argv[1]))
     ext = os.path.splitext(path)[-1]
@@ -63,6 +67,8 @@ def main():
     else:
         print(f"No file: {path}")
         return
+    if not HIGHLIGHT:
+        ext = "no_hl"
 
     func = None
     for exts, f in FILE_TYPES:
