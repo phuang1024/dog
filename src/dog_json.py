@@ -54,7 +54,7 @@ def parse_json(data: str):
             dict_status = 0
 
         if data[0] == "\"":
-            col = MAGENTA if dict_status == 0 and len(layers) > 0 and layers[-1] == DICT else YELLOW
+            col = CYAN if dict_status == 0 and len(layers) > 0 and layers[-1] == DICT else YELLOW
             sys.stdout.write(col)
             sys.stdout.write("\"")
             data = data[1:]
