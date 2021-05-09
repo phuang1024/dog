@@ -28,7 +28,7 @@ from dog_c import parse_c
 from dog_xml import parse_xml
 from dog_java import parse_java
 
-VERSION = "0.0.3"
+VERSION = "0.0.4"
 FILE_TYPES = (
     ((".py", ".pyw"), parse_python),
     ((".c", ".h", ".i"), parse_c),
