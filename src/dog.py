@@ -19,10 +19,11 @@
 
 import sys
 import os
+import argparse
 from dog_constants import *
 from dog_bark import bark
 from dog_json import parse_json
-from dog_python import parse_python, parse_normal
+from dog_python import parse_python
 from dog_c import parse_c
 from dog_xml import parse_xml
 from dog_java import parse_java
@@ -34,30 +35,21 @@ FILE_TYPES = (
     ((".xml", ".html"), parse_xml),
     ((".json",), parse_json),
     ((".java",), parse_java),
-    (("no_hl",), parse_normal),
 )
-HIGHLIGHT = True
+
 
 def main():
-    HIGHLIGHT = True
-    if len(sys.argv) == 1:
-        print(f"Dog {VERSION}, a file printer with syntax highlighting.")
-        print("Type \"dog --help\" for more info.")
-        return
-    elif sys.argv[1] == "--help":
-        print("Usage:")
-        print("    dog file.[extension]")
-        return
-    elif sys.argv[1] == "--version":
-        print(VERSION)
-        return
-    elif sys.argv[1] == "bark":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-n", "--no-color", help="don't display any color", action="store_true")
+    parser.add_argument("-b", "--bark", help="display a dog barking animation", action="store_true")
+    parser.add_argument("file", default=None)
+    args = parser.parse_args()
+
+    if args.bark:
         bark()
         return
-    elif sys.argv[2] == "--no_highlight":
-        HIGHLIGHT = False
 
-    path = os.path.expanduser(os.path.abspath(sys.argv[1]))
+    path = os.path.expanduser(os.path.abspath(args.file))
     ext = os.path.splitext(path)[-1]
     if os.path.isfile(path):
         with open(path, "r") as file:
@@ -67,8 +59,10 @@ def main():
     else:
         print(f"No file: {path}")
         return
-    if not HIGHLIGHT:
-        ext = "no_hl"
+
+    if args.no_color:
+        print(data)
+        return
 
     func = None
     for exts, f in FILE_TYPES:
