@@ -17,48 +17,29 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
+# TODO: [Agastya] need to add more java keywords
+
 import sys
 from dog_constants import *
 from dog_utils import is_kwd
 
 KWDS_RED = [
-    "as",     "assert",    "async",    "await",
-    "break",  "continue",  "del",      "elif",
-    "else",   "except",    "finally",  "for",
-    "from",   "if",        "import",   "pass",
-    "raise",  "return",    "try",      "while",
-    "with",   "yield",
+    "break",  "switch", "continue"
+    "else",  "for",
+    "if",        "import",
+    "return",  "while"
 ]
 
 KWDS_BLUE = [
-    "and",  "class",  "def",     "global",
-    "in",   "is",     "lambda",  "nonlocal",
-    "not",  "or",     "True",    "False",
-    "None",
+    "&&",  "class", "void",     "global",  "||",     "true", "false"
 ]
 
 KWDS_YELLOW = [
-    "abs",          "all",         "any",       "ascii",
-    "bin",          "breakpoint",  "callable",  "chr",
-    "compile",      "delattr",     "dir",       "divmod",
-    "eval",         "exec",        "filter",    "format",
-    "getattr",      "globals",     "hasattr",   "hash",
-    "help",         "hex",         "id",        "input",
-    "isinstance",   "issubclass",  "iter",      "len",
-    "locals",       "map",         "max",       "min",
-    "next",         "oct",         "open",      "ord",
-    "pow",          "print",       "repr",      "reversed",
-    "round",        "setattr",     "sorted",    "sum",
-    "vars",         "zip",
+    "println", "print", "nextInt()", "nextFloat()", "nextDouble()", "nextBoolean()", "nextLine()", "hasNextBoolean()"
 ]
 
 KWDS_GREEN = [
-    "bool",       "bytearray",     "bytes",      "classmethod",
-    "complex",    "dict",          "enumerate",  "float",
-    "frozenset",  "int",           "list",       "memoryview",
-    "object",     "property",      "range",      "set",
-    "slice",      "staticmethod",  "str",        "super",
-    "tuple",      "type",
+    "char", "int", "String", "float", "double", "long", "short", "scan" 
 ]
 
 STRING_START = sorted([
@@ -69,16 +50,20 @@ STRING_START = sorted([
 ], key=len, reverse=True)
 
 
-def parse_python(data):
+def parse_java(data):
     prev = " "
     in_string = False
     string_char = ""
+    comment = False
 
     while len(data) > 0:
-        sys.stdout.write(WHITE)
-
         # Comment
-        if data.startswith("#") and not in_string:
+        # TODO: Multiline comment support
+        if (data.startswith("//") or data.startswith("/*") or data.startswith("*")) and not in_string:
+            if data.startswith("/*"):
+                comment = True
+            if data.startswith("*/"):
+                comment = False
             while data[0] != "\n":
                 sys.stdout.write(GRAY)
                 sys.stdout.write(data[0])
@@ -107,14 +92,6 @@ def parse_python(data):
         # Write string color
         if in_string:
             sys.stdout.write(YELLOW)
-            sys.stdout.write(data[0])
-            prev = data[0]
-            data = data[1:]
-            continue
-
-        # Number literals
-        if (prev not in VAR_CHARS) and (data[0] in string.digits):
-            sys.stdout.write(GREEN)
             sys.stdout.write(data[0])
             prev = data[0]
             data = data[1:]
@@ -151,6 +128,4 @@ def parse_python(data):
             sys.stdout.write(data[:1])
             prev = data[0]
             data = data[1:]
-
-def parse_normal(data):
-    print(data)
+        sys.stdout.write(WHITE)
