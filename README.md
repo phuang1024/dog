@@ -2,7 +2,7 @@
 
 Writes file data to stdout with syntax highlighting.
 
-`dog program.py`
+`dog [-h] [-n] [-b] file`
 
 ## Contributors
 
