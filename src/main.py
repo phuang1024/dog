@@ -47,7 +47,7 @@ def get_lang(path, lang):
 def main():
     parser = argparse.ArgumentParser(description="Console printer with syntax highlighting.")
     parser.add_argument("file", help="File path to read from (put - for stdin)")
-    parser.add_argument("-v", "--version", help="Print version info.")
+    parser.add_argument("-v", "--version", help="Print version info.", action="store_true")
     parser.add_argument("-l", "--lang", nargs="?", default="", help="Force language mode. Omit for autodetect.", choices=LANGS)
     parser.add_argument("--linenos", action="store_true", help="Show line numbers.")
     parser.add_argument("-w", "--whitespace", action="store_true", help="Show whitespace as bullet points.")
