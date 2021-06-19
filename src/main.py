@@ -21,6 +21,7 @@ import sys
 import io
 import argparse
 import lang_json
+from utils import *
 
 VERSION = "0.1.0"
 LANGS = (
@@ -70,7 +71,8 @@ def main():
         lang_json.dump(istream, ostream)
     ostream.seek(0)
 
-    print(ostream.read())
+    sys.stdout.write(ostream.read())
+    sys.stdout.write(RESET)
 
 
 main()
