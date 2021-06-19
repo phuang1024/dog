@@ -78,7 +78,7 @@ def main():
     recording_col = False
 
     if args.linenos:
-        sys.stdout.write(f"{GRAY}1   {WHITE}")
+        sys.stdout.write(f"{GRAY}1     {WHITE}")
 
     while len(ch := ostream.read(1)) > 0:
         sys.stdout.write(ch)
@@ -95,7 +95,7 @@ def main():
         if ch == "\n" and args.linenos:
             sys.stdout.write(GRAY)
             sys.stdout.write(str(line))
-            sys.stdout.write("   ")
+            sys.stdout.write(" "*(6-len(str(line))))
             sys.stdout.write(curr_col)
             line += 1
 
