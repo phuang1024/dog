@@ -20,6 +20,7 @@
 import sys
 import io
 import argparse
+import lang_json
 
 VERSION = "0.1.0"
 LANGS = (
@@ -59,8 +60,17 @@ def main():
         with open(args.file, "rb") as file:
             data = file.read()
 
-    stream = io.BytesIO(data)
+    istream = io.BytesIO(data)
+    ostream = io.StringIO()
     lang = get_lang(args.file, args.lang)
+
+    if lang == "txt":
+        ostream.write(istream.read().decode())
+    elif lang == "json":
+        lang_json.dump(istream, ostream)
+    ostream.seek(0)
+
+    print(ostream.read())
 
 
 main()
