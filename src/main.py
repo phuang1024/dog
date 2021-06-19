@@ -23,7 +23,7 @@ import argparse
 import lang_json
 from utils import *
 
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 LANGS = (
     "json",
     "txt",
