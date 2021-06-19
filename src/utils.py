@@ -20,9 +20,12 @@
 BLACK = "\x1b[30m"
 BLUE = "\x1b[34m"
 CYAN = "\x1b[36m"
+GRAY = "\x1b[1;30m"
 GREEN = "\x1b[32m"
 MAGENTA = "\x1b[35m"
 RED = "\x1b[31m"
 RESET = "\x1b[39m"
 WHITE = "\x1b[37m"
 YELLOW = "\x1b[33m"
+
+BULLET_POINT = b"\xe2\x80\xa2".decode()

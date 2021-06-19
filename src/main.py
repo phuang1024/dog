@@ -46,9 +46,11 @@ def get_lang(path, lang):
 
 def main():
     parser = argparse.ArgumentParser(description="Console printer with syntax highlighting.")
+    parser.add_argument("file", help="File path to read from (put - for stdin)")
     parser.add_argument("-v", "--version", help="Print version info.")
     parser.add_argument("-l", "--lang", nargs="?", default="", help="Force language mode. Omit for autodetect.", choices=LANGS)
-    parser.add_argument("file", help="File path to read from (put - for stdin)")
+    parser.add_argument("--linenos", action="store_true", help="Show line numbers.")
+    # parser.add_argument("-w", "--whitespace", action="store_true", help="Show whitespace as bullet points.")
     args = parser.parse_args()
 
     if args.version:
@@ -71,7 +73,32 @@ def main():
         lang_json.dump(istream, ostream)
     ostream.seek(0)
 
-    sys.stdout.write(ostream.read())
+    line = 2
+    curr_col = WHITE
+    recording_col = False
+
+    if args.linenos:
+        sys.stdout.write(f"{GRAY}1   {WHITE}")
+
+    while len(ch := ostream.read(1)) > 0:
+        sys.stdout.write(ch)
+
+        if ch == "\x1b":
+            curr_col = "\x1b"
+            recording_col = True
+        elif ch == "m" and recording_col:
+            recording_col = False
+            curr_col += "m"
+        elif recording_col:
+            curr_col += ch
+
+        if ch == "\n" and args.linenos:
+            sys.stdout.write(GRAY)
+            sys.stdout.write(str(line))
+            sys.stdout.write("   ")
+            sys.stdout.write(curr_col)
+            line += 1
+
     sys.stdout.write(RESET)
 
 
