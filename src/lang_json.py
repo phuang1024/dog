@@ -49,19 +49,21 @@ def write_str(element: east.json.String, ostream: IO[str]):
 def write_array(element: east.json.Array, ostream: IO[str]):
     ostream.write(WHITE)
     ostream.write("[")
+    ostream.write(element.padding_after_start)
     for ele in element.elements:
         write_element(ele, ostream)
     ostream.write(WHITE)
     ostream.write("]")
 
 def write_dpair(element: east.json.DictPair, ostream: IO[str]):
-    write_str(element.key, ostream)
-    write_colon(element.colon, ostream)
+    write_element(element.key, ostream)
+    write_element(element.colon, ostream)
     write_element(element.value, ostream)
 
 def write_dict(element: east.json.Dictionary, ostream: IO[str]):
     ostream.write(WHITE)
     ostream.write("{")
+    ostream.write(element.padding_after_start)
     for ele in element.elements:
         write_element(ele, ostream)
     ostream.write(WHITE)
