@@ -50,7 +50,7 @@ def main():
     parser.add_argument("-v", "--version", help="Print version info.")
     parser.add_argument("-l", "--lang", nargs="?", default="", help="Force language mode. Omit for autodetect.", choices=LANGS)
     parser.add_argument("--linenos", action="store_true", help="Show line numbers.")
-    # parser.add_argument("-w", "--whitespace", action="store_true", help="Show whitespace as bullet points.")
+    parser.add_argument("-w", "--whitespace", action="store_true", help="Show whitespace as bullet points.")
     args = parser.parse_args()
 
     if args.version:
@@ -81,7 +81,12 @@ def main():
         sys.stdout.write(f"{GRAY}1     {WHITE}")
 
     while len(ch := ostream.read(1)) > 0:
-        sys.stdout.write(ch)
+        if args.whitespace and ch == " ":
+            sys.stdout.write(GRAY)
+            sys.stdout.write(BULLET_POINT)
+            sys.stdout.write(curr_col)
+        else:
+            sys.stdout.write(ch)
 
         if ch == "\x1b":
             curr_col = "\x1b"
@@ -100,6 +105,9 @@ def main():
             line += 1
 
     sys.stdout.write(RESET)
+    if args.linenos:
+        sys.stdout.write("\n")
+    sys.stdout.flush()
 
 
 main()

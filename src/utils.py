@@ -28,4 +28,4 @@ RESET = "\x1b[39m"
 WHITE = "\x1b[37m"
 YELLOW = "\x1b[33m"
 
-BULLET_POINT = b"\xe2\x80\xa2".decode()
+BULLET_POINT = b"\xe2\x88\x98".decode()
