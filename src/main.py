@@ -33,7 +33,7 @@ LANGS = (
 def get_lang(path, lang):
     if lang != "":
         return lang
-    if path == "-":
+    if path == "-" or path is None:
         return "txt"
 
     if path.endswith(".json"):
@@ -46,7 +46,7 @@ def get_lang(path, lang):
 
 def main():
     parser = argparse.ArgumentParser(description="Console printer with syntax highlighting.")
-    parser.add_argument("file", help="File path to read from (put - for stdin)")
+    parser.add_argument("file", help="File path to read from (put - or omit for stdin)", nargs="?")
     parser.add_argument("-v", "--version", help="Print version info.", action="store_true")
     parser.add_argument("-l", "--lang", nargs="?", default="", help="Force language mode. Omit for autodetect.", choices=LANGS)
     parser.add_argument("--linenos", action="store_true", help="Show line numbers.")
@@ -57,7 +57,7 @@ def main():
         print(f"Dog {VERSION}")
         return
 
-    if args.file == "-":
+    if args.file == "-" or args.file is None:
         data = sys.stdin.read().encode()
     else:
         with open(args.file, "rb") as file:
