@@ -1,6 +1,6 @@
 #
-#  Dog
-#  Similar to Unix CAT but with syntax highlighting.
+#  Piano Video
+#  Piano MIDI visualizer
 #  Copyright Patrick Huang 2021
 #
 #  This program is free software: you can redistribute it and/or modify
@@ -21,15 +21,15 @@ import os
 import subprocess
 import shutil
 
-VERSION = "0.0-4"
+VERSION = "0.1-0"
 
 PARENT = os.path.dirname(os.path.realpath(__file__))
 SRC = os.path.join(os.path.dirname(PARENT), "src")
 PKG_NAME = f"dog_{VERSION}"
 PKG = os.path.join(PARENT, PKG_NAME)
 
-BIN = os.path.join(PKG, "usr", "local", "bin")
-START = os.path.join(BIN, "dog")
+BIN = os.path.join(PKG, "usr", "local", "bin", "dog_utils")
+START = os.path.join(PKG, "usr", "local", "bin", "dog")
 CONTROL = os.path.join(PKG, "DEBIAN", "control")
 
 DATA = {
@@ -39,30 +39,46 @@ DATA = {
     "Priority": "optional",
     "Architecture": "i386",
     "Maintainer": "Patrick Huang <huangpatrick16777216@gmail.com>",
-    "Description": "Unix Cat with syntax highlighting."
+    "Description": "Console printer with syntax highlighting."
 }
+
+START_DATA = """
+#!/usr/bin/python3.8
+
+import sys
+import os
+
+cmd = "python3.8 /usr/local/bin/dog_utils/main.py "
+for a in sys.argv[1:]:
+    cmd += a
+    cmd += " "
+os.system(cmd.strip())
+""".strip()
 
 
 os.makedirs(BIN)
 os.makedirs(os.path.dirname(CONTROL))
 
-for file in os.listdir(SRC):
-    if file.endswith(".py"):
-        shutil.copy(os.path.join(SRC, file), os.path.join(BIN, file))
+dirs = [""]
+while len(dirs) > 0:
+    for f in os.listdir(os.path.join(SRC, d:=dirs.pop())):
+        relpath = os.path.join(d, f)
+        abspath = os.path.join(SRC, relpath)
+        dst = os.path.join(BIN, relpath)
+
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        if os.path.isfile(abspath) and (".py" in relpath or "assets" in relpath) and (not "__pycache__" in relpath):
+            shutil.copy(abspath, dst)
+        elif os.path.isdir(abspath):
+            dirs.append(relpath)
 
 with open(CONTROL, "w") as file:
     for key in DATA:
         file.write("{}: {}\n".format(key, DATA[key]))
 
-os.rename(os.path.join(BIN, "dog.py"), os.path.join(BIN, "dog"))
+with open(START, "w") as file:
+    file.write(START_DATA)
 os.system(f"chmod +x {START}")
 
-with open(START, "r") as file:
-    data = file.read()
-with open(START, "w") as file:
-    file.write("#!/usr/bin/python3\n\n")
-    file.write(data)
-
 subprocess.Popen(["dpkg-deb", "--build", PKG_NAME], cwd=PARENT).wait()
-
 shutil.rmtree(PKG)
