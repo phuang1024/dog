@@ -1,20 +1,13 @@
-.. Dog documentation master file, created by
-   sphinx-quickstart on Sat Jun 19 13:11:38 2021.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Dog
+===
 
-Welcome to Dog's documentation!
-===============================
+Prints file data to stdout with syntax highlighting.
+
+.. image:: https://raw.githubusercontent.com/HuangPatrick16777216/dog/main/images/json.png
+   :width: 150
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   install
