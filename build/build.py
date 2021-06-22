@@ -39,7 +39,7 @@ DATA = {
     "Priority": "optional",
     "Architecture": "i386",
     "Maintainer": "Patrick Huang <huangpatrick16777216@gmail.com>",
-    "Description": "Console printer with syntax highlighting."
+    "Description": "Prints file data to stdout with syntax highlighting."
 }
 
 START_DATA = """
