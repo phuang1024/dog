@@ -17,8 +17,6 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-# Checks if there is trailing whitespace in source files.
-
 import os
 
 PARENT = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
